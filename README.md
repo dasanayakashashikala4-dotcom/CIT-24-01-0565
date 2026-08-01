@@ -1,8 +1,6 @@
 # CIT-24-01-0565
 Assignment 1 - Docker WordPress Application
 
-Assignment 1 - Docker WordPress Application
-
 Student Registration Number - CIT-24-01-0565
 Name: P.D.D.S. Dasanayaka
 
