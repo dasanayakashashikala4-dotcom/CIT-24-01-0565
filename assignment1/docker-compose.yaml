@@ -1,0 +1,39 @@
+services:
+  database:
+    image: mysql:8.0
+    container_name: wordpress-db
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wp123
+    volumes:
+      - wordpress-data:/var/lib/mysql
+    networks:
+      - wordpress-network
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress-app
+    restart: on-failure
+    depends_on:
+      - database
+    ports:
+      - "5000:80"
+    environment:
+      WORDPRESS_DB_HOST: database:3306
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wp123
+      WORDPRESS_DB_NAME: wordpress
+    networks:
+      - wordpress-network
+
+networks:
+  wordpress-network:
+    name: wordpress-network
+    driver: bridge
+
+volumes:
+  wordpress-data:
+    name: wordpress-data
